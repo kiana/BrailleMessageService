@@ -44,18 +44,14 @@ public class MainActivity extends Activity {
 	public void onToggleClicked(View view) {
 		ToggleButton button = (ToggleButton) view;
 		switch (button.getId()) {
-			case R.id.dot1:
+			case R.id.dot1: 
+			case R.id.dot3: 
+			case R.id.dot5:
 				haptics.play(Launcher.SHARP_CLICK_100);
 			case R.id.dot2:
-				haptics.play(Launcher.SHARP_CLICK_66);
-			case R.id.dot3:
-				haptics.play(Launcher.SHARP_CLICK_33);
 			case R.id.dot4:
-				haptics.play(Launcher.TICK_100);
-			case R.id.dot5:
-				haptics.play(Launcher.TICK_66);
 			case R.id.dot6:
-				haptics.play(Launcher.TICK_33);
+				haptics.play(Launcher.SHARP_CLICK_33);
 		}
 	}
 }
