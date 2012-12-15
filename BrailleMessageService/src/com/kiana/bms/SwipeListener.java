@@ -1,20 +1,40 @@
 package com.kiana.bms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class SwipeListener extends SimpleOnGestureListener {
     private static final int SWIPE_THRESHOLD = 100;
     private static final int SWIPE_VELOCITY_THRESHOLD = 100;
     private Context context;
+    private BrailleConverter brailleConverter;
+    private StringBuilder sentence;
     
-    public SwipeListener(Context context) {
+    public SwipeListener(Context context, View view) {
     	this.context = context;
+    	initializeBrailleConverter(view);
+    	sentence = new StringBuilder();
     }
 
-    private void onSwipeRight() {
+    private void initializeBrailleConverter(View view) {
+		List<ToggleButton> buttonList = new ArrayList<ToggleButton>();
+		buttonList.add((ToggleButton)view.findViewById(R.id.dot1)); 
+		buttonList.add((ToggleButton)view.findViewById(R.id.dot2)); 
+		buttonList.add((ToggleButton)view.findViewById(R.id.dot3)); 
+		buttonList.add((ToggleButton)view.findViewById(R.id.dot4)); 
+		buttonList.add((ToggleButton)view.findViewById(R.id.dot5)); 
+		buttonList.add((ToggleButton)view.findViewById(R.id.dot6)); 
+		brailleConverter = new BrailleConverter(buttonList);
+	}
+
+	private void onSwipeRight() {
     	Toast.makeText(context, "right", Toast.LENGTH_SHORT).show();
     }
 
@@ -27,7 +47,14 @@ public class SwipeListener extends SimpleOnGestureListener {
     }
 
     private void onSwipeBottom() {
-    	Toast.makeText(context, "bottom", Toast.LENGTH_SHORT).show();
+    	Character letter = brailleConverter.toLetter();
+    	if (letter != null) {
+    		sentence.append(letter);
+        	Toast.makeText(context, sentence.toString(), Toast.LENGTH_SHORT).show();
+        	//TODO haptics indicating letter ADDED
+    	} else {
+    		//TODO haptics indicating letter NOT ADDED
+    	}
     }
     
     @Override

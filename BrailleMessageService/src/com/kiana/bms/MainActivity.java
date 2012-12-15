@@ -1,7 +1,6 @@
 package com.kiana.bms;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -23,7 +22,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         try {
-        	gestureDetector  = new GestureDetector(MainActivity.this, new SwipeListener(this));
+        	gestureDetector  = new GestureDetector(MainActivity.this, new SwipeListener(this, findViewById(android.R.id.content)));
         	haptics = new Launcher(this);
         } catch (Exception e) {
             Log.e("BMS", "Exception!: " + e.getMessage());
@@ -47,11 +46,11 @@ public class MainActivity extends Activity {
         
     	ToggleButton toggle = (ToggleButton) view;
         boolean on = toggle.isChecked();
-        if (on) {
-        	toggle.setBackgroundColor(Color.parseColor("#191970"));
-        } else {
-        	toggle.setBackgroundColor(Color.parseColor("#FF4500"));
-        }
+//        if (on) {
+//        	toggle.setBackgroundColor(Color.parseColor("#191970"));
+//        } else {
+//        	toggle.setBackgroundColor(Color.parseColor("#FF4500"));
+//        }
         
         haptics.play(Launcher.DOUBLE_STRONG_CLICK_100);
     }
