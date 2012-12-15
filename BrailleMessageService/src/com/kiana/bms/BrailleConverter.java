@@ -35,7 +35,7 @@ public class BrailleConverter {
 	}
 	
 	private boolean exclamationMark() {
-		return !checked(1) && checked(2) && checked(3) && !checked(4) && checked(5) && checked(6);
+		return !checked(1) && checked(2) && checked(3) && !checked(4) && checked(5) && !checked(6);
 	}
 	
 	private boolean a() {

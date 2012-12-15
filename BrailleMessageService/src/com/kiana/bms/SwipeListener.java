@@ -57,12 +57,12 @@ public class SwipeListener extends SimpleOnGestureListener {
     	Character character = brailleConverter.toCharacter();
     	if (character != null) {
     		sentence.append(character);
-    		toggleAllButtonsOff();
         	Toast.makeText(context, sentence.toString(), Toast.LENGTH_SHORT).show();
         	//TODO haptics indicating letter ADDED
     	} else {
     		//TODO haptics indicating letter NOT ADDED
     	}
+		toggleAllButtonsOff();
     }
     
     @Override
