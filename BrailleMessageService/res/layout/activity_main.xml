@@ -5,6 +5,7 @@
     android:layout_height="fill_parent"
     android:gravity="center"
     android:stretchColumns="*"
+    android:background="#000000"
     android:importantForAccessibility="yes" >
 
     <TableRow>

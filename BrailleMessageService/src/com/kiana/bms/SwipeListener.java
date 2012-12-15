@@ -16,6 +16,7 @@ public class SwipeListener extends SimpleOnGestureListener {
     private Context context;
     private BrailleConverter brailleConverter;
     private StringBuilder sentence;
+    List<ToggleButton> buttonList;
     
     public SwipeListener(Context context, View view) {
     	this.context = context;
@@ -24,7 +25,7 @@ public class SwipeListener extends SimpleOnGestureListener {
     }
 
     private void initializeBrailleConverter(View view) {
-		List<ToggleButton> buttonList = new ArrayList<ToggleButton>();
+		buttonList = new ArrayList<ToggleButton>();
 		buttonList.add((ToggleButton)view.findViewById(R.id.dot1)); 
 		buttonList.add((ToggleButton)view.findViewById(R.id.dot2)); 
 		buttonList.add((ToggleButton)view.findViewById(R.id.dot3)); 
@@ -33,6 +34,12 @@ public class SwipeListener extends SimpleOnGestureListener {
 		buttonList.add((ToggleButton)view.findViewById(R.id.dot6)); 
 		brailleConverter = new BrailleConverter(buttonList);
 	}
+    
+    private void toggleAllButtonsOff() {
+    	for (ToggleButton button : buttonList) {
+    		button.setChecked(false);
+    	}
+    }
 
 	private void onSwipeRight() {
     	Toast.makeText(context, "right", Toast.LENGTH_SHORT).show();
@@ -47,9 +54,10 @@ public class SwipeListener extends SimpleOnGestureListener {
     }
 
     private void onSwipeBottom() {
-    	Character letter = brailleConverter.toLetter();
-    	if (letter != null) {
-    		sentence.append(letter);
+    	Character character = brailleConverter.toCharacter();
+    	if (character != null) {
+    		sentence.append(character);
+    		toggleAllButtonsOff();
         	Toast.makeText(context, sentence.toString(), Toast.LENGTH_SHORT).show();
         	//TODO haptics indicating letter ADDED
     	} else {

@@ -7,7 +7,6 @@ import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ToggleButton;
 
 import com.immersion.uhl.Launcher;
 
@@ -28,7 +27,6 @@ public class MainActivity extends Activity {
             Log.e("BMS", "Exception!: " + e.getMessage());
         }
         
-        
     }
 
 	@Override
@@ -43,15 +41,6 @@ public class MainActivity extends Activity {
     }
 
     public void onToggleClicked(View view) {
-        
-    	ToggleButton toggle = (ToggleButton) view;
-        boolean on = toggle.isChecked();
-//        if (on) {
-//        	toggle.setBackgroundColor(Color.parseColor("#191970"));
-//        } else {
-//        	toggle.setBackgroundColor(Color.parseColor("#FF4500"));
-//        }
-        
         haptics.play(Launcher.DOUBLE_STRONG_CLICK_100);
     }
 }
